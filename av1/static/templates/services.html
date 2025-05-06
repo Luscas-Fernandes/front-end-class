@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Carrinho de Serviços de TI</h1>
+        
+        <!-- Seção de informações do usuário -->
+        <section class="user-section">
+            <h2>Informações do Usuário</h2>
+            <div class="user-info">
+                <div class="info-label">
+                    <span>Nome:</span>
+                    <span id="user-name">João da Silva</span>
+                </div>
+                <div class="info-label">
+                    <span>E-mail:</span>
+                    <span id="user-email">joao.silva@exemplo.com</span>
+                </div>
+                <div class="info-label">
+                    <span>Tipo de Usuário:</span>
+                    <span id="user-type">Professor</span>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Seção de solicitações existentes -->
+        <section class="requests-section">
+            <h2>Minhas Solicitações</h2>
+            <table id="requests-table">
+                <thead>
+                    <tr>
+                        <th>Data do Pedido</th>
+                        <th>Nº Solicitação</th>
+                        <th>Serviço de TI</th>
+                        <th>Status</th>
+                        <th>Preço</th>
+                        <th>Data Prevista</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Dados fictícios -->
+                    <tr>
+                        <td>15/03/2023</td>
+                        <td>2023-001</td>
+                        <td>Desenvolvimento de Aplicativo</td>
+                        <td><span class="status status-completed">CONCLUÍDO</span></td>
+                        <td>R$ 1.200,00</td>
+                        <td>30/03/2023</td>
+                        <td><button class="btn btn-danger" onclick="deleteRequest(this)">Excluir</button></td>
+                    </tr>
+                    <tr>
+                        <td>20/03/2023</td>
+                        <td>2023-002</td>
+                        <td>Manutenção de Computadores</td>
+                        <td><span class="status status-pending">EM ANDAMENTO</span></td>
+                        <td>R$ 350,00</td>
+                        <td>25/03/2023</td>
+                        <td><button class="btn btn-danger" onclick="deleteRequest(this)">Excluir</button></td>
+                    </tr>
+                    <tr>
+                        <td>01/04/2023</td>
+                        <td>2023-003</td>
+                        <td>Configuração de Rede</td>
+                        <td><span class="status status-draft">EM ELABORAÇÃO</span></td>
+                        <td>R$ 500,00</td>
+                        <td>10/04/2023</td>
+                        <td><button class="btn btn-danger" onclick="deleteRequest(this)">Excluir</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        
+        <!-- Seção de nova solicitação -->
+        <section class="new-request-section">
+            <h2>Nova Solicitação de Serviço</h2>
+            <div class="service-form">
+                <div class="form-group">
+                    <div class="form-control">
+                        <label for="service-type">Tipo de Serviço:</label>
+                        <select id="service-type" onchange="updateServiceInfo()">
+                            <option value="">Selecione um serviço...</option>
+                            <option value="professor">Oferecer-se como Professor</option>
+                            <option value="aluno">Oferecer-se como Aluno</option>
+                            <option value="desenvolvimento">Desenvolvimento de Software</option>
+                            <option value="manutencao">Manutenção de Computadores</option>
+                            <option value="rede">Configuração de Rede</option>
+                            <option value="consultoria">Consultoria em TI</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="form-control">
+                        <label>Preço:</label>
+                        <div id="service-price" class="info-value">Selecione um serviço</div>
+                    </div>
+                    <div class="form-control">
+                        <label>Prazo de Atendimento:</label>
+                        <div id="service-deadline" class="info-value">Selecione um serviço</div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="form-control">
+                        <label>Data Prevista de Atendimento:</label>
+                        <div id="service-date" class="info-value">Selecione um serviço</div>
+                    </div>
+                    <div class="form-control">
+                        <label>Status:</label>
+                        <div id="service-status" class="info-value status status-draft">EM ELABORAÇÃO</div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <button class="btn btn-primary" onclick="addRequest()">Incluir Solicitação</button>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
