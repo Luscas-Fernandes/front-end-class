@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blackjack</title>
+    <link rel="stylesheet" href="blackjack-style.css">
+</head>
+<body>
+    <header>
+        <h1 onclick="resetGame()">BLACKJACK</h1>
+    </header>
+
+    <div class="game-container">
+        <div class="setup-panel" id="setupPanel">
+            <h2 class="setup-title">Configuração do Jogo</h2>
+            
+            <form id="gameSetupForm" class="setup-grid">
+                <div class="form-group">
+                    <label for="rounds">Número de Rodadas (mínimo 3):</label>
+                    <input type="number" id="rounds" min="3" value="3" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="timeout">Tempo por jogada (segundos):</label>
+                    <input type="number" id="timeout" min="10" max="120" value="30" required>
+                </div>
+                
+                <div class="form-group" style="grid-column: span 2">
+                    <label>Jogadores (2-4):</label>
+                    <div class="player-list" id="playerNamesContainer">
+                        <!-- Player name inputs will be added here dynamically -->
+                    </div>
+                    <div class="player-controls">
+                        <button type="button" class="add-player-btn" id="addPlayerBtn">+ Adicionar Jogador</button>
+                        <span class="error-message" id="addPlayerError"></span>
+                    </div>
+                </div>
+                
+                <button type="submit" class="start-game-btn" id="startGameBtn">Iniciar Jogo</button>
+            </form>
+        </div>
+
+        <div class="game-panel" id="gamePanel">
+            <div class="round-info">
+                <span>Rodada: <span id="currentRound">1</span>/<span id="totalRounds">3</span></span>
+                <span>Tempo por jogada: <span id="timeoutDisplay">30</span>s</span>
+            </div>
+            
+            <div class="dealer-area">
+                <h2>Banca</h2>
+                <div class="player-area">
+                    <div class="player-name">Banca</div>
+                    <div class="player-cards" id="dealerCards"></div>
+                    <div class="player-info">
+                        <span class="player-points">Pontos: <span id="dealerPoints">0</span></span>
+                        <span class="player-status" id="dealerStatus"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="players-area" id="playersArea">
+                <!-- Player areas will be added here dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="roundResultModal">
+        <div class="modal-content">
+            <h2 class="modal-title">Resultado da Rodada</h2>
+            <p class="modal-message" id="roundResultMessage"></p>
+            <button id="nextRoundBtn" class="modal-btn">Próxima Rodada</button>
+        </div>
+    </div>
+
+    <div class="modal" id="gameOverModal">
+        <div class="modal-content">
+            <h2 class="modal-title">Fim do Jogo</h2>
+            <p class="modal-message" id="gameOverMessage"></p>
+            <button id="newGameBtn" class="modal-btn">Nova Partida</button>
+        </div>
+    </div>
+
+    <script src="blackjack-script.js"></script>
+</body>
+</html>
