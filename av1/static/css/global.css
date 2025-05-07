@@ -1,1 +1,159 @@
-/* PUT GLOBAL.CSS SCOPE HERE AND EXPORT GLOBAL TO OTHER CSS FILES */
+@import url('https://fonts.googleapis.com/css2?family=Cutive+Mono&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
+:root{
+    --blue-link-color: #35bff5;
+    --slighlty-darker-blue-link-color: #1c6e8f;
+    --darker-blue-link-color: #12465a;
+    --normal-vertical-margin: 2rem 0;
+    --minimal-margin: 1.25rem;
+    --normal-margin: 2rem;
+    --margin: 4rem;
+    --text: "Cutive Mono";
+    --title: "JetBrains Mono";
+    --title-size: 2rem;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+*{
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    width: 75%;
+    margin: 0 auto;
+    font-family: sans-serif;
+    background-color: #fafafa;
+}
+
+a:hover{
+    color: var(--blue-link-color);
+}
+
+a{
+    color: #333;
+    text-decoration: none;
+}
+
+.header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 8rem 0;
+    font-family: var(--title);
+    font-weight: normal;
+}
+
+.header-options{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    list-style: none;
+    color: #333;
+}
+
+.header-options li a{
+    font-family: var(--text);
+    font-size: 1.25rem;
+    text-decoration: none;
+}
+
+.header-options li a:hover{
+    color: var(--blue-link-color);
+}
+
+.h1{
+    font-family: var(--text);
+    font-size: var(--title-size);
+    font-weight: 600;
+}
+
+.slogan{
+    font-family: var(--text);
+    font-weight: 500;
+    font-size: 1.2rem;
+    text-transform: capitalize;
+    position: relative;
+    max-width: max-content;
+}
+
+.underline::after{
+    position: absolute;
+    content: '';
+    display: block;
+    height: 2px;
+    width: 0%;
+    background: linear-gradient(to right, var(--blue-link-color), var(--darker-blue-link-color));
+    margin-top: 4px;
+    transition: .3s;
+}
+
+.underline:hover::after{
+    width: 100%;
+}
+
+.contacts{
+    display: flex;
+    justify-content: space-between;
+    padding: var(--normal-vertical-margin);
+
+    h2{
+        font-family: var(--title);
+    }
+}
+
+.direct-contact{
+    display: flex;
+    flex-direction: row;
+    gap: var(--minimal-margin);
+    list-style: none;
+
+    a{
+        text-decoration: underline;
+    }
+}
+
+.telto{
+    color: #333;
+    text-decoration: none;
+}
+
+.telto:hover{
+    color: var(--blue-link-color)
+}
+
+.payment-info{
+    padding: 2rem 0 1rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h2{
+        font-family: var(--title);
+    }
+
+    div{
+        display: flex;
+
+        gap: var(--minimal-margin);
+
+    }
+}
+
+.payment-methods{
+    cursor: pointer;
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.address{
+    padding-bottom: 12rem;
+    font-family: var(--text);
+}
