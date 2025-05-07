@@ -361,7 +361,7 @@ function dealerTurn() {
             updateGameUI();
             
             if (gameState.dealer.points > 21) {
-                gameState.dealer.status = 'ESTOROU!';
+                gameState.dealer.status = 'ESTOUROU!';
                 clearInterval(dealerDrawInterval);
                 endRound();
             }
@@ -564,7 +564,7 @@ function hit() {
     
     if (currentPlayer.points > 21) {
         currentPlayer.isBust = true;
-        currentPlayer.status = 'ESTOROU!';
+        currentPlayer.status = 'ESTOUROU!';
         nextPlayerTurn();
     } else {
         startPlayerTurn();
