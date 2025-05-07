@@ -446,8 +446,9 @@ function endGame() {
     let gameOverMsg = '<h3>Resultado Final</h3><br>';
     gameOverMsg += '<div class="final-results">';
     gameState.players.forEach(player => {
-        const avatarHTML = player.avatar ? 
-            `<img src="${player.avatar}" class="player-avatar" alt="${player.name}" style="vertical-align: middle; margin-right: 5px;">` : '';
+        const avatarHTML = player.avatar 
+    ? `<img src="${player.avatar}" class="player-avatar" alt="${player.name}" style="vertical-align: middle; margin-right: 5px;" onerror="this.style.display='none';">` 
+    : '';
         gameOverMsg += `<p>${avatarHTML}<strong>${player.name}:</strong> ${roundsWon[player.name]} vitória(s)</p>`;
     });
     
@@ -484,9 +485,9 @@ function updateGameUI() {
         else if (player.hasBlackjack) statusClass = 'player-blackjack';
         
         const avatarHTML = player.avatar 
-            ? `<img src="${player.avatar}" class="player-avatar" alt="${player.name}">`
-            : '';
-        
+    ? `<img src="${player.avatar}" class="player-avatar" alt="${player.name}" onerror="this.style.display='none';">`
+    : '';
+
         playerElement.innerHTML = `
             <div class="player-name">${avatarHTML}${player.name}</div>
             <div class="player-cards">${player.cards.map(card => createCardElement(card)).join('')}</div>
