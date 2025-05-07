@@ -23,49 +23,39 @@ const serviceData = {
 
 let requestCounter = 0;
 
-// Função para verificar login e atualizar navegação
 function checkAuthStatus() {
     const authOptions = document.getElementById('auth-options');
     const user = JSON.parse(localStorage.getItem('usuarioParthenogenesis'));
 
     if (user) {
-        // Usuário logado - mostra menu completo
         authOptions.innerHTML = `
             <li><a href="./index.html">Home</a></li>
             <li><a href="./gallery.html">Gallery</a></li>
             <li><a href="#" id="logout-link">Sign Out</a></li>
         `;
         
-        // Configura evento de logout
         document.getElementById('logout-link').addEventListener('click', function(e) {
             e.preventDefault();
             localStorage.removeItem('usuarioParthenogenesis');
             window.location.href = 'index.html';
         });
         
-        // Atualiza informações do usuário
         document.getElementById('user-name').textContent = user.nome;
         document.getElementById('user-email').textContent = user.email;
     } else {
-        // Usuário não logado - redireciona para login
         window.location.href = 'signin.html';
     }
 }
 
-// Quando o DOM estiver carregado
 document.addEventListener('DOMContentLoaded', function() {
-    // Verifica o status de autenticação
     checkAuthStatus();
 
-    // Configura os eventos do formulário
     document.getElementById('service-type').addEventListener('change', updateServiceInfo);
     document.getElementById('add-request-btn').addEventListener('click', addRequest);
     
-    // Carrega solicitações existentes (se houver)
     loadExistingRequests();
 });
 
-// Atualiza as informações do serviço selecionado
 function updateServiceInfo() {
     const serviceType = document.getElementById('service-type').value;
     const priceElement = document.getElementById('service-price');
@@ -76,7 +66,6 @@ function updateServiceInfo() {
         priceElement.textContent = serviceData[serviceType].price;
         deadlineElement.textContent = serviceData[serviceType].deadline;
         
-        // Calcula a data prevista
         const today = new Date();
         const deadlineDays = parseInt(serviceData[serviceType].deadline);
         if (!isNaN(deadlineDays)) {
@@ -92,7 +81,6 @@ function updateServiceInfo() {
     }
 }
 
-// Formata a data para dd/mm/aaaa
 function formatDate(date) {
     const day = String(date.getDate()).padStart(2, '0');
     const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -100,7 +88,6 @@ function formatDate(date) {
     return `${day}/${month}/${year}`;
 }
 
-// Adiciona uma nova solicitação
 function addRequest() {
     const serviceType = document.getElementById('service-type').value;
     
@@ -126,24 +113,20 @@ function addRequest() {
         <td><button class="btn btn-danger" onclick="deleteRequest(this)">Delete</button></td>
     `;
     
-    // Limpa o formulário
     document.getElementById('service-type').value = '';
     updateServiceInfo();
     
-    // Ordena a tabela por data
     sortTableByDate();
     
     alert('Request added successfully!');
 }
 
-// Exclui uma solicitação
 function deleteRequest(button) {
     if (confirm('Are you sure you want to delete this request?')) {
         button.closest('tr').remove();
     }
 }
 
-// Ordena a tabela por data (mais recente primeiro)
 function sortTableByDate() {
     const tbody = document.querySelector('#requests-table tbody');
     const rows = Array.from(tbody.querySelectorAll('tr'));
@@ -151,21 +134,15 @@ function sortTableByDate() {
     rows.sort((a, b) => {
         const dateA = new Date(a.cells[0].textContent.split('/').reverse().join('-'));
         const dateB = new Date(b.cells[0].textContent.split('/').reverse().join('-'));
-        return dateB - dateA; // Ordem decrescente
     });
     
-    // Remove todas as linhas
     while (tbody.firstChild) {
         tbody.removeChild(tbody.firstChild);
     }
     
-    // Adiciona as linhas ordenadas
     rows.forEach(row => tbody.appendChild(row));
 }
 
-// Carrega solicitações existentes (pode ser adaptado para carregar do localStorage)
 function loadExistingRequests() {
-    // Aqui você pode carregar solicitações salvas anteriormente
-    // Por enquanto está vazio para começar do zero
     requestCounter = 0;
 }
