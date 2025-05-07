@@ -3,126 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Parthenogenesis</title>
+    <link rel="shortcut icon" href="./../imgs/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./../css/services.css">
 </head>
-
 <body>
-    <div class="container">
-        <h1>Carrinho de Serviços de TI</h1>
+    <header class="header">
+        <h1 class="h1">P<span style="color: #35bff5;">art</span>henogenesis</h1>
         
-        <!-- Seção de informações do usuário -->
-        <section class="user-section">
-            <h2>Informações do Usuário</h2>
-            <div class="user-info">
-                <div class="info-label">
-                    <span>Nome:</span>
-                    <span id="user-name">João da Silva</span>
+        <h2 class="slogan underline">Protecting your art from AI</h2>
+
+        <ul class="header-options" id="auth-options">
+
+        </ul>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1>Carrinho de Serviços de TI</h1>
+            
+            <!-- Seção de informações do usuário -->
+            <section class="user-section">
+                <h2>Informações do Usuário</h2>
+                <div class="user-info">
+                    <div class="info-label">
+                        <span>Nome:</span>
+                        <span id="user-name"></span>
+                    </div>
+                    <div class="info-label">
+                        <span>E-mail:</span>
+                        <span id="user-email"></span>
+                    </div>
                 </div>
-                <div class="info-label">
-                    <span>E-mail:</span>
-                    <span id="user-email">joao.silva@exemplo.com</span>
+            </section>
+            
+            <!-- Seção de solicitações existentes -->
+            <section class="requests-section">
+                <h2>Minhas Solicitações</h2>
+                <table id="requests-table">
+                    <thead>
+                        <tr>
+                            <th>Data do Pedido</th>
+                            <th>Nº Solicitação</th>
+                            <th>Serviço de TI</th>
+                            <th>Status</th>
+                            <th>Preço</th>
+                            <th>Data Prevista</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- As solicitações serão preenchidas via JavaScript -->
+                    </tbody>
+                </table>
+            </section>
+            
+            <!-- Seção de nova solicitação -->
+            <section class="new-request-section">
+                <h2>Nova Solicitação de Serviço</h2>
+                <div class="service-form">
+                    <div class="form-group">
+                        <div class="form-control">
+                            <label for="service-type">Serviço de TI:</label>
+                            <select id="service-type">
+                                <option value="">Selecione um serviço...</option>
+                                <option value="professor">Oferecer-se como Professor</option>
+                                <option value="aluno">Oferecer-se como Aluno</option>
+                                <option value="oferecer_consultoria">Oferecer Consultoria</option>
+                                <option value="receber_consultoria">Receber Consultoria</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="form-control">
+                            <label>Preço:</label>
+                            <div id="service-price" class="info-value">Selecione um serviço</div>
+                        </div>
+                        <div class="form-control">
+                            <label>Prazo de Atendimento:</label>
+                            <div id="service-deadline" class="info-value">Selecione um serviço</div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="form-control">
+                            <label>Data Prevista de Atendimento:</label>
+                            <div id="service-date" class="info-value">Selecione um serviço</div>
+                        </div>
+                        <div class="form-control">
+                            <label>Status:</label>
+                            <div id="service-status" class="info-value status status-draft">EM ELABORAÇÃO</div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <button id="add-request-btn" class="btn btn-primary">Incluir Solicitação</button>
+                    </div>
                 </div>
-                <div class="info-label">
-                    <span>Tipo de Usuário:</span>
-                    <span id="user-type">Professor</span>
-                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="contacts">
+            <h2>Company's Contact</h2>
+            <ul class="direct-contact">
+                <li><a href="tel:+558193529488" class="telto">Call +55 81 9352-9488</a></li>
+                <li><a href="https://wa.me//5581997508702?text=Olá, Marília, CTO do Parthenogenesis!%20Te%20encontrei%20pelo%20site">Whats App: +55 81 9352-9488</a></li>
+                <li><a href="mailto:parthenogenesis@gmail.com">Send Email</a></li>
+            </ul>
+        </div>
+
+        <div class="payment-info">
+            <h2>Payment Methods</h2>
+
+            <div class="payment-methods">
+                <img src="https://brand.assets.adidas.com/image/upload/f_auto,q_auto,fl_lossy/mastercard_2bc6a4921f.png" alt="mastercard">
+                <img src="https://brand.assets.adidas.com/image/upload/f_auto,q_auto,fl_lossy/PXI_IMAGE_c8e3cdecc4.jpg" alt="pix">
+                <img src="https://brand.assets.adidas.com/image/upload/f_auto,q_auto,fl_lossy/Visa_e6ac2f5dd8.jpg" alt="visa">
             </div>
-        </section>
+        </div>
+
+        <div class="address">
+            <span>2025 © Parthenogenesis · CNPJ 24.988.907/0001-79<br></span>
+            <span>Rua Cícero Dias, 91 · Recife, PE · 52050-150</span>
+        </div>
         
-        <!-- Seção de solicitações existentes -->
-        <section class="requests-section">
-            <h2>Minhas Solicitações</h2>
-            <table id="requests-table">
-                <thead>
-                    <tr>
-                        <th>Data do Pedido</th>
-                        <th>Nº Solicitação</th>
-                        <th>Serviço de TI</th>
-                        <th>Status</th>
-                        <th>Preço</th>
-                        <th>Data Prevista</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Dados fictícios -->
-                    <tr>
-                        <td>15/03/2023</td>
-                        <td>2023-001</td>
-                        <td>Desenvolvimento de Aplicativo</td>
-                        <td><span class="status status-completed">CONCLUÍDO</span></td>
-                        <td>R$ 1.200,00</td>
-                        <td>30/03/2023</td>
-                        <td><button class="btn btn-danger" onclick="deleteRequest(this)">Excluir</button></td>
-                    </tr>
-                    <tr>
-                        <td>20/03/2023</td>
-                        <td>2023-002</td>
-                        <td>Manutenção de Computadores</td>
-                        <td><span class="status status-pending">EM ANDAMENTO</span></td>
-                        <td>R$ 350,00</td>
-                        <td>25/03/2023</td>
-                        <td><button class="btn btn-danger" onclick="deleteRequest(this)">Excluir</button></td>
-                    </tr>
-                    <tr>
-                        <td>01/04/2023</td>
-                        <td>2023-003</td>
-                        <td>Configuração de Rede</td>
-                        <td><span class="status status-draft">EM ELABORAÇÃO</span></td>
-                        <td>R$ 500,00</td>
-                        <td>10/04/2023</td>
-                        <td><button class="btn btn-danger" onclick="deleteRequest(this)">Excluir</button></td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-        
-        <!-- Seção de nova solicitação -->
-        <section class="new-request-section">
-            <h2>Nova Solicitação de Serviço</h2>
-            <div class="service-form">
-                <div class="form-group">
-                    <div class="form-control">
-                        <label for="service-type">Tipo de Serviço:</label>
-                        <select id="service-type" onchange="updateServiceInfo()">
-                            <option value="">Selecione um serviço...</option>
-                            <option value="professor">Oferecer-se como Professor</option>
-                            <option value="aluno">Oferecer-se como Aluno</option>
-                            <option value="desenvolvimento">Desenvolvimento de Software</option>
-                            <option value="manutencao">Manutenção de Computadores</option>
-                            <option value="rede">Configuração de Rede</option>
-                            <option value="consultoria">Consultoria em TI</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <div class="form-control">
-                        <label>Preço:</label>
-                        <div id="service-price" class="info-value">Selecione um serviço</div>
-                    </div>
-                    <div class="form-control">
-                        <label>Prazo de Atendimento:</label>
-                        <div id="service-deadline" class="info-value">Selecione um serviço</div>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <div class="form-control">
-                        <label>Data Prevista de Atendimento:</label>
-                        <div id="service-date" class="info-value">Selecione um serviço</div>
-                    </div>
-                    <div class="form-control">
-                        <label>Status:</label>
-                        <div id="service-status" class="info-value status status-draft">EM ELABORAÇÃO</div>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <button class="btn btn-primary" onclick="addRequest()">Incluir Solicitação</button>
-                </div>
-            </div>
-        </section>
-    </div>
+    </footer>
+    
+
+    <script src="./../../src/services.js"></script>
 </body>
 </html>

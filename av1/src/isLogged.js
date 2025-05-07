@@ -4,9 +4,10 @@ function checkAuthStatus() {
 
     if (user) {
         authOptions.innerHTML = `
-            <li><a href="gallery.html">Hi, ${user.nome.split(' ')[0]}</a></li>
+            <li><a href="#">Hi, ${user.nome.split(' ')[0]}</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="services.html">Services</a></li>
             <li><a href="#" id="logout-link">Logout</a></li>
-            <li><a href="gallery.html">Your gallery</a></li>
         `;
         
         document.getElementById('logout-link').addEventListener('click', function(e) {
