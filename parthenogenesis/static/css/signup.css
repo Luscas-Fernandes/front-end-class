@@ -1,0 +1,70 @@
+/* SIGNUP MODULARIZED CSS */
+#cadastroForm {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#cadastroForm label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-family: var(--text);
+}
+
+#cadastroForm input,
+#cadastroForm select {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: var(--text);
+}
+
+#cadastroForm small {
+    display: block;
+    margin-bottom: 1rem;
+    font-size: 0.8rem;
+    color: #666;
+}
+
+#cadastroForm button {
+    padding: 0.75rem 1.5rem;
+    margin-right: 1rem;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-family: var(--title);
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#cadastroForm button:hover {
+    background-color: var(--darker-blue-link-color);
+}
+
+#cadastroForm input[type="radio"] {
+    width: auto;
+    margin-right: 0.5rem;
+}
+
+#cadastroForm input[type="radio"] + label {
+    display: inline;
+    margin-right: 1rem;
+}
+
+.cadastro-title{
+    text-align: center;
+    font-family: var(--title);
+}
+
+#username {
+    font-family: var(--title);
+    text-align: center;
+    display: block;
+    margin: 2rem 0;
+}
