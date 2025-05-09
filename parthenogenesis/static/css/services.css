@@ -159,7 +159,7 @@ select {
     color: white;
 }
 
-/* Override css */
+/* Override/overload css */
 
 .header{
     margin: 2rem;

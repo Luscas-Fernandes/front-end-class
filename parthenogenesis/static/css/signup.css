@@ -52,6 +52,7 @@
     margin-right: 0.5rem;
 }
 
+/* seletor + vizinho próximo */
 #cadastroForm input[type="radio"] + label {
     display: inline;
     margin-right: 1rem;
