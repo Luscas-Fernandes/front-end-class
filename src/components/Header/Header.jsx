@@ -1,0 +1,36 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
+import './../../assets/styles/global.css';
+
+const Header = () => {
+  const { user, logout } = useAuth();
+
+  return (
+    <header className="header">
+      <h1 className="h1">
+        <Link to="/">P<span style={{ color: '#35bff5' }}>art</span>henogenesis</Link>
+      </h1>
+      
+      <h2 className="slogan underline">Protecting your art from AI</h2>
+
+      <ul className="header-options">
+        {user ? (
+          <>
+            <li><span>Hi, {user.name.split(' ')[0]}</span></li>
+            <li><Link to="/gallery">Gallery</Link></li>
+            <li><Link to="/services">Services</Link></li>
+            <li><button onClick={logout}>Logout</button></li>
+          </>
+        ) : (
+          <>
+            <li><Link to="/signin">Sign in</Link></li>
+            <li><Link to="/signup">Sign up</Link></li>
+          </>
+        )}
+      </ul>
+    </header>
+  );
+};
+
+export default Header;

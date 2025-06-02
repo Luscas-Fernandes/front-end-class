@@ -1,0 +1,21 @@
+/* src/assets/styles/variables.css */
+:root {
+  /* Original color variables */
+  --blue-link-color: #35bff5;
+  --slighlty-darker-blue-link-color: #1c6e8f;
+  --darker-blue-link-color: #12465a;
+  
+  /* Original spacing variables */
+  --minimal-margin: 1.25rem;
+  --normal-margin: 2rem;
+  --margin: 4rem;
+  --normal-vertical-margin: 2rem 0;
+  
+  /* Original typography */
+  --text: "Cutive Mono";
+  --title: "JetBrains Mono";
+  --title-size: 2rem;
+}
+
+/* Original font import */
+@import url('https://fonts.googleapis.com/css2?family=Cutive+Mono&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
