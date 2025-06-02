@@ -17,7 +17,7 @@ const Header = () => {
       <ul className="header-options">
         {user ? (
           <>
-            <span>Hi, {(user.name && user.name.split(' ')[0]) || 'User'}</span>
+            <span>Hi, {(user.nome && user.nome.split(' ')[0]) || 'User'}</span>
             <li><Link to="/gallery">Gallery</Link></li>
             <li><Link to="/services">Services</Link></li>
             <a href="#" className="logout-link" onClick={(e) => { e.preventDefault(); logout(); }}>
