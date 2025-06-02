@@ -1,21 +1,23 @@
-import React from 'react';
+import PropTypes from 'prop-types';
 import './GalleryItem.css';
 
-const GalleryItem = ({ image, onDelete }) => {
+export default function GalleryItem({ imageData, index, onDelete }) {
   return (
     <div className="gallery-item">
-      <div className="image-container">
-        <img src={image} alt="User uploaded" className="gallery-image" />
-        <button 
-          className="delete-btn"
-          onClick={onDelete}
-          aria-label="Delete image"
-        >
-          ×
-        </button>
-      </div>
+      <img src={imageData} alt={`Gallery item ${index}`} />
+      <button 
+        className="delete-btn"
+        onClick={() => onDelete(index)}
+        aria-label="Delete image"
+      >
+        &times;
+      </button>
     </div>
   );
-};
+}
 
-export default GalleryItem;
+GalleryItem.propTypes = {
+  imageData: PropTypes.string.isRequired,
+  index: PropTypes.number.isRequired,
+  onDelete: PropTypes.func.isRequired
+};

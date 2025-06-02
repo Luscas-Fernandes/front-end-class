@@ -1,0 +1,71 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 8rem 0 2rem 0;
+  font-family: var(--title);
+  font-weight: normal;
+}
+
+.h1 {
+  font-family: var(--text);
+  font-size: var(--title-size);
+  font-weight: 600;
+}
+
+.h1 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.slogan {
+  font-family: var(--text);
+  font-weight: 500;
+  font-size: 1.2rem;
+  text-transform: capitalize;
+  position: relative;
+  max-width: max-content;
+}
+
+.header-options {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  list-style: none;
+}
+
+.header-options li {
+  font-family: var(--text);
+  font-size: 1.25rem;
+}
+
+.header-options a, .header-options button {
+  color: #333;
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  padding: 0;
+}
+
+.header-options a:hover, .header-options button:hover {
+  color: var(--blue-link-color);
+}
+
+.underline::after {
+  content: '';
+  display: block;
+  height: 2px;
+  width: 0;
+  background: linear-gradient(to right, var(--blue-link-color), var(--darker-blue-link-color));
+  margin-top: 4px;
+  transition: width 0.3s;
+}
+
+.underline:hover::after {
+  width: 100%;
+}

@@ -1,83 +1,87 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import GalleryItem from '../../components/GalleryItem';
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
+import GalleryItem from '../../components/GalleryItem/GalleryItem';
+import { verifyAuth } from '../../utils/auth';
+import { loadImages, saveImage, deleteImage } from '../../utils/storage';
 import './Gallery.css';
 
-const Gallery = () => {
+export default function Gallery() {
   const [images, setImages] = useState([]);
-  const [user, setUser] = useState(null);
+  const [userName, setUserName] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
-    const userData = JSON.parse(localStorage.getItem('usuarioParthenogenesis'));
-    if (!userData) {
+    const user = verifyAuth();
+    if (!user) {
       navigate('/signin');
     } else {
-      setUser(userData);
-      loadImages();
+      setUserName(user.nome);
+      setImages(loadImages());
     }
   }, [navigate]);
 
-  const loadImages = () => {
-    const savedImages = localStorage.getItem('savedImages') ? JSON.parse(localStorage.getItem('savedImages')) : [];
-    setImages(savedImages);
-  };
-
   const handleFileChange = (e) => {
     const file = e.target.files[0];
-    if (!file) return;
-
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      const newImages = [...images, event.target.result];
-      localStorage.setItem('savedImages', JSON.stringify(newImages));
-      setImages(newImages);
-    };
-    reader.readAsDataURL(file);
-  };
-
-  const deleteImage = (index) => {
-    if (window.confirm('Are you sure you want to delete this image?')) {
-      const newImages = images.filter((_, i) => i !== index);
-      localStorage.setItem('savedImages', JSON.stringify(newImages));
-      setImages(newImages);
+    if (file && file.type.match('image.*')) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        if (saveImage(event.target.result)) {
+          setImages(loadImages());
+        }
+      };
+      reader.readAsDataURL(file);
     }
   };
 
-  if (!user) return null;
+  const handleDeleteImage = (index) => {
+    if (window.confirm('Are you sure you want to delete this image?')) {
+      const updatedImages = deleteImage(index);
+      setImages(updatedImages);
+    }
+  };
 
   return (
-    <main className="main">
-      <h1 className="gallery-title">
-        {user.nome + (user.nome.slice(-1) === 's' ? "'" : "'s")} Gallery
-      </h1>
-      
-      <div className="upload-container">
-        <label htmlFor="fileInput" className="upload-btn">Select Image</label>
-        <input 
-          type="file" 
-          id="fileInput" 
-          accept="image/*" 
-          onChange={handleFileChange}
-          style={{ display: 'none' }}
-        />
-        <p className="info">Images are saved in your browser's storage</p>
-      </div>
-      
-      <div className="gallery-grid">
-        {images.length === 0 ? (<p className="empty-gallery">No images uploaded yet</p>) : 
-        (
-            images.map((image, index) => (
-            <GalleryItem 
+    <>
+      <Header />
+      <main className="gallery-page">
+        <h1 className="gallery-title">{userName}'s Gallery</h1>
+        
+        <div className="upload-container">
+          <label htmlFor="file-upload" className="upload-btn">
+            Select Image
+          </label>
+          <input
+            id="file-upload"
+            type="file"
+            accept="image/*"
+            onChange={handleFileChange}
+          />
+          <p className="upload-info">
+            Images are saved in your browser's local storage.
+          </p>
+          <p className="upload-info">
+            Storage limit: ~5MB (varies by browser).
+          </p>
+        </div>
+        
+        <div className="gallery-grid">
+          {images.length === 0 ? (
+            <p className="empty-gallery">No images uploaded yet.</p>
+          ) : (
+            images.map((imageData, index) => (
+              <GalleryItem
                 key={index}
-                image={image}
-                onDelete={() => deleteImage(index)}
-            />
+                imageData={imageData}
+                index={index}
+                onDelete={handleDeleteImage}
+              />
             ))
-        )}
-      </div>
-    </main>
+          )}
+        </div>
+      </main>
+      <Footer />
+    </>
   );
-};
-
-export default Gallery;
+}

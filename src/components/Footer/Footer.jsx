@@ -1,7 +1,6 @@
-import React from 'react';
-import './../../assets/styles/global.css';
+import './Footer.css';
 
-const Footer = () => {
+export default function Footer() {
   return (
     <footer>
       <div className="contacts">
@@ -16,9 +15,9 @@ const Footer = () => {
       <div className="payment-info">
         <h2>Payment Methods</h2>
         <div className="payment-methods">
-          <img src="https://brand.assets.adidas.com/image/upload/f_auto,q_auto,fl_lossy/mastercard_2bc6a4921f.png" alt="mastercard" />
-          <img src="https://brand.assets.adidas.com/image/upload/f_auto,q_auto,fl_lossy/PXI_IMAGE_c8e3cdecc4.jpg" alt="pix" />
-          <img src="https://brand.assets.adidas.com/image/upload/f_auto,q_auto,fl_lossy/Visa_e6ac2f5dd8.jpg" alt="visa" />
+          <img src="/assets/imgs/mastercard.png" alt="mastercard" />
+          <img src="/assets/imgs/pix.png" alt="pix" />
+          <img src="/assets/imgs/visa.png" alt="visa" />
         </div>
       </div>
 
@@ -28,6 +27,4 @@ const Footer = () => {
       </div>
     </footer>
   );
-};
-
-export default Footer;
+}

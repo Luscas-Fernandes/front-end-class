@@ -1,10 +1,26 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import useAuth from '../../hooks/useAuth';
-import './../../assets/styles/global.css';
+import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { checkAuthStatus, logout } from '../../utils/auth';
+import './Header.css';
 
-const Header = () => {
-  const { user, logout } = useAuth();
+export default function Header() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userName, setUserName] = useState('');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const user = checkAuthStatus();
+    if (user) {
+      setIsLoggedIn(true);
+      setUserName(user.nome.split(' ')[0]);
+    }
+  }, []);
+
+  const handleLogout = () => {
+    logout();
+    setIsLoggedIn(false);
+    navigate('/');
+  };
 
   return (
     <header className="header">
@@ -15,15 +31,12 @@ const Header = () => {
       <h2 className="slogan underline">Protecting your art from AI</h2>
 
       <ul className="header-options">
-        {user ? (
+        {isLoggedIn ? (
           <>
-            <span>Hi, {(user.nome && user.nome.split(' ')[0]) || 'User'}</span>
+            <li><span>Hi, {userName}</span></li>
             <li><Link to="/gallery">Gallery</Link></li>
             <li><Link to="/services">Services</Link></li>
-            <a href="#" className="logout-link" onClick={(e) => { e.preventDefault(); logout(); }}>
-  Logout
-</a>
-
+            <li><button onClick={handleLogout}>Sign out</button></li>
           </>
         ) : (
           <>
@@ -34,6 +47,4 @@ const Header = () => {
       </ul>
     </header>
   );
-};
-
-export default Header;
+}
