@@ -17,10 +17,13 @@ const Header = () => {
       <ul className="header-options">
         {user ? (
           <>
-            <li><span>Hi, {user.name.split(' ')[0]}</span></li>
+            <span>Hi, {(user.name && user.name.split(' ')[0]) || 'User'}</span>
             <li><Link to="/gallery">Gallery</Link></li>
             <li><Link to="/services">Services</Link></li>
-            <li><button onClick={logout}>Logout</button></li>
+            <a href="#" className="logout-link" onClick={(e) => { e.preventDefault(); logout(); }}>
+  Logout
+</a>
+
           </>
         ) : (
           <>
