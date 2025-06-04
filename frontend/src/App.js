@@ -280,28 +280,6 @@ function App() {
           )}
         </div>
         
-        <div className="board" ref={boardRef} onDragOver={handleDragOver}>
-          <div className="board-left" onDrop={(e) => handleDrop(e, 'left')} onDragOver={handleDragOver}>
-            {gameState.board.length > 0 && (
-              <div className="drop-indicator">
-                {gameState.currentPlayer === playerId ? 'Soltar aqui' : ''}
-              </div>
-            )}
-          </div>
-          
-          <div className="board-center">
-            {gameState.board.map((domino, index) => renderDomino(domino, index))}
-          </div>
-          
-          <div className="board-right" onDrop={(e) => handleDrop(e, 'right')} onDragOver={handleDragOver}>
-            {gameState.board.length > 0 && (
-              <div className="drop-indicator">
-                {gameState.currentPlayer === playerId ? 'Soltar aqui' : ''}
-              </div>
-            )}
-          </div>
-        </div>
-        
         <div
           style={{
             background: 'white',
@@ -336,6 +314,28 @@ function App() {
           </div>
         </div>
 
+
+        <div className="board" ref={boardRef} onDragOver={handleDragOver}>
+          <div className="board-left" onDrop={(e) => handleDrop(e, 'left')} onDragOver={handleDragOver}>
+            {gameState.board.length > 0 && (
+              <div className="drop-indicator">
+                {gameState.currentPlayer === playerId ? 'Soltar aqui' : ''}
+              </div>
+            )}
+          </div>
+          
+          <div className="board-center">
+            {gameState.board.map((domino, index) => renderDomino(domino, index))}
+          </div>
+          
+          <div className="board-right" onDrop={(e) => handleDrop(e, 'right')} onDragOver={handleDragOver}>
+            {gameState.board.length > 0 && (
+              <div className="drop-indicator">
+                {gameState.currentPlayer === playerId ? 'Soltar aqui' : ''}
+              </div>
+            )}
+          </div>
+        </div>
         
         <div className="opponents">
           {otherPlayers.map((player) => (
