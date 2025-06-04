@@ -551,4 +551,55 @@ body {
   .domino-left, .domino-right {
     font-size: 1rem;
   }
+  .dorme {
+    margin: 20px auto;
+    text-align: center;
+  }
+
+  .dorme-dominoes {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 10px;
+  }
+
+  .domino-back {
+    width: 40px;
+    height: 80px;
+    background-color: #f0f0f0;
+    border: 2px solid #333;
+    border-radius: 5px;
+    display: inline-block;
+  }
+
+  .auto-played-message {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(255, 215, 0, 0.9);
+    padding: 10px 20px;
+    border-radius: 5px;
+    z-index: 100;
+    animation: fadeInOut 2s ease-in-out;
+  }
+
+  .passed-turn-message {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(255, 165, 0, 0.9);
+    padding: 10px 20px;
+    border-radius: 5px;
+    z-index: 100;
+    animation: fadeInOut 2s ease-in-out;
+  }
+
+  @keyframes fadeInOut {
+    0% { opacity: 0; }
+    20% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { opacity: 0; }
+  }
 }

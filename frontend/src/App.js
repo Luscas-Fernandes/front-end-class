@@ -13,9 +13,13 @@ function App() {
   const [error, setError] = useState('');
   const [roundResult, setRoundResult] = useState(null);
   const [gameOver, setGameOver] = useState(null);
+  const [timeLeft, setTimeLeft] = useState(20);
+  const [autoPlayed, setAutoPlayed] = useState(null);
+  const [passedTurn, setPassedTurn] = useState(null);
   
   const boardRef = useRef(null);
   const dominoRefs = useRef([]);
+  const timerRef = useRef(null);
 
   const joinGame = () => {
     if (!playerName.trim()) {
@@ -31,6 +35,8 @@ function App() {
 
   const passTurn = () => {
     socket.emit('passTurn');
+    setPassedTurn(gameState.players.find(p => p.id === playerId)?.name);
+    setTimeout(() => setPassedTurn(null), 2000);
   };
 
   const handleDominoDoubleClick = (index) => {
@@ -96,13 +102,22 @@ function App() {
     const handleGameStarted = (state) => {
       setGameState(state);
       setScreen('game');
+      setTimeLeft(20);
+    };
+
+    const handleAutoPlayed = (playerName) => {
+      setAutoPlayed(playerName);
+      setTimeout(() => setAutoPlayed(null), 2000);
     };
 
     socket.on('joinedGame', handleJoinedGame);
     socket.on('playerJoined', handlePlayerJoined);
     socket.on('playerLeft', handlePlayerLeft);
     socket.on('gameStarted', handleGameStarted);
-    socket.on('gameStateUpdate', setGameState);
+    socket.on('gameStateUpdate', (state) => {
+      setGameState(state);
+      setTimeLeft(20);
+    });
     socket.on('roundOver', (result) => {
       setRoundResult(result);
       setTimeout(() => setRoundResult(null), 3000);
@@ -116,6 +131,7 @@ function App() {
       setGameOver(null);
       setScreen('waiting');
     });
+    socket.on('autoPlayed', handleAutoPlayed);
 
     return () => {
       socket.off('joinedGame', handleJoinedGame);
@@ -128,8 +144,28 @@ function App() {
       socket.off('roomFull');
       socket.off('duplicateName');
       socket.off('gameReset');
+      socket.off('autoPlayed', handleAutoPlayed);
     };
   }, []);
+
+  useEffect(() => {
+    if (gameState?.currentPlayer === playerId && screen === 'game') {
+      clearInterval(timerRef.current);
+      setTimeLeft(20);
+      
+      timerRef.current = setInterval(() => {
+        setTimeLeft(prev => {
+          if (prev <= 1) {
+            clearInterval(timerRef.current);
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    }
+
+    return () => clearInterval(timerRef.current);
+  }, [gameState?.currentPlayer, playerId, screen]);
 
   const renderDomino = (domino, index, isPlayer = false) => {
     const [left, right] = domino;
@@ -158,6 +194,7 @@ function App() {
           <p>Duas duplas competem para ser a primeira a marcar pelo menos 6 pontos.</p>
           <p>Cada rodada pode valer 1, 2, 3 ou 4 pontos dependendo de como o jogo termina.</p>
           <p>Ganha quem baixar todas as peças primeiro ou, em caso de fechamento, quem tiver menos pontos na mão.</p>
+          <p>Cada jogador tem 20 segundos para fazer sua jogada.</p>
         </div>
         <div className="join-form">
           <input
@@ -213,6 +250,18 @@ function App() {
           </div>
         )}
         
+        {autoPlayed && (
+          <div className="auto-played-message">
+            <p>{autoPlayed} jogou automaticamente (tempo esgotado)</p>
+          </div>
+        )}
+        
+        {passedTurn && (
+          <div className="passed-turn-message">
+            <p>{passedTurn} passou a vez</p>
+          </div>
+        )}
+        
         <div className="game-header">
           <div className="teams">
             <div className={`team ${currentTeam.name === 'team1' ? 'current-team' : ''}`}>
@@ -253,6 +302,41 @@ function App() {
           </div>
         </div>
         
+        <div
+          style={{
+            background: 'white',
+            borderRadius: '10px',
+            padding: '10px 20px',
+            margin: '20px auto',
+            width: 'fit-content',
+            minWidth: '300px',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+          }}
+        >
+          <h4 style={{ margin: 0, color: '#004080' }}>
+            Dorme ({gameState.dominoes?.length || 4} peças)
+          </h4>
+
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              gap: '5px',
+              marginTop: '10px',
+              flexWrap: 'nowrap',
+              overflowX: 'auto',
+            }}
+          >
+            {Array.from({ length: gameState.dominoes?.length || 4 }).map((_, i) => (
+              <div key={`dorme-${i}`} className="domino-back"></div>
+            ))}
+          </div>
+        </div>
+
+        
         <div className="opponents">
           {otherPlayers.map((player) => (
             <div key={player.id} className="opponent">
@@ -269,7 +353,11 @@ function App() {
         <div className="player-area">
           <div className="player-info">
             <h3>{gameState.players.find(p => p.id === playerId)?.name}</h3>
-            <p>{gameState.currentPlayer === playerId ? 'Sua vez!' : 'Aguardando outros jogadores...'}</p>
+            <p>
+              {gameState.currentPlayer === playerId ? 
+                `Sua vez! Tempo: ${timeLeft}s` : 
+                'Aguardando outros jogadores...'}
+            </p>
           </div>
           
           <div className="player-hand">

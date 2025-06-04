@@ -66,7 +66,7 @@ function canPlaceDomino(domino, end) {
 // Initialize new game
 function initializeGame() {
   const dominoSet = shuffleArray(generateDominoSet());
-  gameState.dominoes = dominoSet.slice(4); // Dorme with 4 dominoes
+  gameState.dominoes = dominoSet.slice(28); // Dorme with 4 dominoes (28 pieces total)
   gameState.hands = {};
   gameState.board = [];
   
@@ -116,7 +116,8 @@ function getSerializableGameState() {
     hands: gameState.hands,
     scores: gameState.scores,
     currentRoundPoints: gameState.currentRoundPoints,
-    consecutiveTies: gameState.consecutiveTies
+    consecutiveTies: gameState.consecutiveTies,
+    dominoes: gameState.dominoes
   };
 }
 
@@ -125,6 +126,7 @@ function startTurnTimeout() {
   if (gameState.turnTimeout) clearTimeout(gameState.turnTimeout);
   
   gameState.turnTimeout = setTimeout(() => {
+    const currentPlayer = gameState.players.find(p => p.id === gameState.currentPlayer);
     const currentPlayerHand = gameState.hands[gameState.currentPlayer];
     const possibleMoves = [];
     
@@ -146,9 +148,11 @@ function startTurnTimeout() {
       // Choose random move
       const move = possibleMoves[Math.floor(Math.random() * possibleMoves.length)];
       placeDomino(gameState.currentPlayer, move.index, move.end);
+      io.emit('autoPlayed', currentPlayer.name);
     } else {
       // No possible moves, pass turn
       passTurn(gameState.currentPlayer);
+      io.emit('autoPlayed', `${currentPlayer.name} passou a vez (tempo esgotado)`);
     }
   }, 20000); // 20 seconds
 }
